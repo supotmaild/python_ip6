@@ -2,7 +2,7 @@ import socket,sys,time,threading
 import Tkinter as tk
 from BaseHTTPServer import HTTPServer
 from SimpleHTTPServer import SimpleHTTPRequestHandler
-global time,tk,t,threading,on_closing,server_start,keep_running,click,KEEP_RUNNING
+global time,win,tk,t,threading,on_closing,server_start,keep_running,click,KEEP_RUNNING
 global socket,server,HTTPServer,SimpleHTTPRequestHandler,HTTPServerV6,MyHandler
 global label1
 
@@ -21,10 +21,9 @@ class HTTPServerV6(HTTPServer):
   address_family = socket.AF_INET6
 
 def on_closing():
-  global server,KEEP_RUNNING
+  global server,win,KEEP_RUNNING
   KEEP_RUNNING = False
   server.server_close()
-  print time.asctime(), "Server Stops - %s:%s" % (HOST_NAME, PORT_NUMBER)
   win.destroy()
 
 KEEP_RUNNING = False
@@ -52,7 +51,7 @@ def click():
     t.start()
 
 def main():
-  global label1
+  global win,label1
   win=tk.Tk()
   win.title('ip6 Web Server 1.0')
   win.protocol("WM_DELETE_WINDOW", on_closing)
